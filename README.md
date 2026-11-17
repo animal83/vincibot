@@ -157,6 +157,7 @@ Im Ordner [`beispiele/`](beispiele/) liegen kleine Programme zum Ausprobieren un
 | `07_musik.py` | Eine kleine Melodie |
 | `08_tanzparty.py` | Tanzen und blinken |
 | `09_gleichzeitig_async.py` | Fahren und leuchten zur gleichen Zeit |
+| `10_sensorwerte.py` | Zeigt fortlaufend alle Sensorwere in der Bash an |
 
 Tipp: Ändere Zahlen und Farben und schau, was passiert. So lernst du am schnellsten!
 
