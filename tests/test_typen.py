@@ -10,7 +10,7 @@ def test_literale_passen_zu_den_woerterbuechern():
     paare = [
         (t.Farbname, w.FARBEN), (t.Gefuehl, w.GEFUEHLE), (t.Tanz, w.TAENZE),
         (t.Bewegung, w.BEWEGUNGEN), (t.Geraeusch, w.GERAEUSCHE), (t.Lied, w.LIEDER),
-        (t.Note, w.NOTEN), (t.SensorFarbe, w.FARBEN_SENSOR),
+        (t.Note, w.NOTEN_MIDI), (t.SensorFarbe, w.FARBEN_SENSOR),
     ]
     for literal, woerterbuch in paare:
         assert set(get_args(literal)) == set(woerterbuch), literal

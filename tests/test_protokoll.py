@@ -54,3 +54,34 @@ def test_positionen_der_lichter():
     assert POSITIONEN["links oben"] == 1 and POSITIONEN["rechts oben"] == 6
     assert POSITIONEN["rechts unten"] == 4 and POSITIONEN["links_unten"] == 3
     assert POSITION_NAMEN[5] == "rechts mitte"
+
+
+def test_toene_werden_als_midi_noten_gesendet():
+    """Der VinciBot erwartet Notennummern, keine Frequenzen in Hertz."""
+    import asyncio
+    from typing import cast
+
+    from vincibot._verbindung import Verbindung
+    from vincibot.asynchron import VinciBotAsync
+
+    befehle: list[tuple[str, int, float]] = []
+
+    class TestVerbindung:
+        async def befehl(self, code: str, sequenz: int, zeitlimit: float):
+            befehle.append((code, sequenz, zeitlimit))
+            return None
+
+    async def spielen() -> None:
+        roboter = VinciBotAsync()
+        roboter._verbindung = cast(Verbindung, TestVerbindung())
+        await roboter.ton("c", 1)
+        await roboter.ton("g", 2, oktave=5)
+        await roboter.ton_hoehe(69, 0.5)
+
+    asyncio.run(spielen())
+
+    assert befehle == [
+        ("audio.play_tone(60, 1)", 45, 60),
+        ("audio.play_tone(79, 2)", 45, 60),
+        ("audio.play_tone(69, 0.5)", 45, 60),
+    ]

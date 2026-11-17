@@ -45,9 +45,8 @@ INSTRUMENTE: list[str] = ["klavier", "e-klavier", "orgel", "gitarre", "e-gitarre
                "cello", "posaune", "klarinette", "saxophon", "floete", "holzfloete", "fagott",
                "chor", "vibraphon", "spieluhr", "steeldrum", "marimba", "synthesizer",
                "weicher synthesizer"]
-# Tonhöhen in Hertz für die vierte Oktave (deutsche Notennamen: h statt b/si)
-NOTEN: dict[str, int] = {"c": 262, "d": 294, "e": 330, "f": 349, "g": 392, "a": 440, "h": 494}
-
+# MIDI-Notennummern für die vierte Oktave (deutsche Notennamen: h statt b/si)
+NOTEN_MIDI: dict[str, int] = {"c": 60, "d": 62, "e": 64, "f": 65, "g": 67, "a": 69, "h": 71}
 
 # Die sechs Lichter von vorne gesehen:   1 6 / 2 5 / 3 4  (Nummer = Platz in der Befehlsliste des Roboters)
 POSITIONEN: dict[str, int] = {

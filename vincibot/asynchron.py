@@ -16,7 +16,6 @@ Beispiel:
 from __future__ import annotations
 
 import asyncio
-import math
 from collections.abc import AsyncIterator, Callable, Mapping, Sequence
 from types import TracebackType
 
@@ -26,7 +25,7 @@ from ._typen import (Bewegung, Bodensensor, DisplayRichtung, Drehrichtung, Einhe
                      Fernbedienungstaste, FahrRichtung, Gefuehl, Geraeusch, Instrument, Lied, Linienfarbe,
                      Note, Position, Rad, Seite, SensorFarbe, Tanz, Taste)
 from ._woerter import (BEWEGUNGEN, FARBEN_SENSOR, GEFUEHLE, GERAEUSCHE, INSTRUMENTE, LIEDER,
-                       NOTEN, POSITIONEN, TAENZE, RoboterFehler, farbe_umrechnen, waehle)
+                       NOTEN_MIDI, POSITIONEN, TAENZE, RoboterFehler, farbe_umrechnen, waehle)
 
 
 class VinciBotAsync:
@@ -239,14 +238,13 @@ class VinciBotAsync:
     async def ton(self, note: Note = "c", schlaege: float = 1, oktave: int = 4) -> None:
         """Spielt einen Ton. note: c d e f g a h (h ist das deutsche 'b'); schlaege: Länge;
         oktave: 3 tiefer, 4 normal, 5 höher."""
-        grundton = waehle(note, NOTEN, "die Note")
-        frequenz = round(grundton * math.pow(2.0, oktave - 4))
-        await self._befehl(f"audio.play_tone({frequenz}, {schlaege})", "note", 60)
+        grundton = waehle(note, NOTEN_MIDI, "die Note")
+        midi_nummer = grundton + 12 * (oktave - 4)
+        await self._befehl(f"audio.play_tone({midi_nummer}, {schlaege})", "note", 60)
 
     async def ton_hoehe(self, midi_nummer: int, schlaege: float = 1) -> None:
         """Spielt einen Ton nach MIDI-Notennummer (60 = mittleres C, 69 = Kammerton a)."""
-        frequenz = round(440.0 * math.pow(2.0, (midi_nummer - 69) / 12))
-        await self._befehl(f"audio.play_tone({frequenz}, {schlaege})", "note", 60)
+        await self._befehl(f"audio.play_tone({midi_nummer}, {schlaege})", "note", 60)
 
     async def pause(self, schlaege: float = 1) -> None:
         """Eine Pause in der Musik."""
