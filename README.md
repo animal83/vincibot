@@ -213,7 +213,7 @@ Die Tabelle der Blöcke und alle Grenzen stehen in [docs/scratch.md](docs/scratc
 | Der Roboter reagiert gar nicht mehr | Aus- und wieder einschalten, danach neu verbinden. |
 | `ModuleNotFoundError: vincibot` | Die Python-Umgebung ist nicht eingeschaltet (`source .venv/bin/activate`). |
 | Umlaute auf dem Display fehlen | Das Display zeigt nicht alle Sonderzeichen. Schreibe „ae“, „oe“, „ue“. |
-| `sprich(...)` versteht deutsche Wörter nicht | Der Roboter spricht nur Englisch. |
+| `sprich(...)` spricht deutsche Wörter falsch oder gar nicht aus | Die Sprachausgabe unterstützt nur englischen Text. |
 
 ## 10. Wie funktioniert das?
 
